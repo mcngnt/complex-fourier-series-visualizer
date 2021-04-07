@@ -3,7 +3,7 @@
 
 ![](res/demo.gif)
 
-##Controls
+## Controls
 - Up : add one epicycloid
 - Down : remove one epicycloid
 - S : let you type in the console the number of epicycloids used
