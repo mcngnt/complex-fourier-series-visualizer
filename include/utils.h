@@ -10,8 +10,8 @@
 #include <vector>
 #include <algorithm>
 
-#define SCREEN_W 1080
-#define SCREEN_H 720
+#define SCREEN_W 1344
+#define SCREEN_H 756
 
 #define PI 3.14
 

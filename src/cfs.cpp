@@ -30,7 +30,7 @@ void CFS::generate_target_eq(std::string fileName)
 	inFile.open("res/saves/" + fileName);
 	if (!inFile)
 	{
-		std::cout << "Unable to open file" << std::endl;
+		throw 0;
 	}
 	std::vector<std::string> myLines;
 
@@ -40,10 +40,7 @@ void CFS::generate_target_eq(std::string fileName)
 	    if(str.size() > 0)
 	        myLines.push_back(str);
 	}
-
-	svgSize.x = std::stof(myLines[0]);
-	svgSize.y = std::stof(myLines[1]);
-	std::string svgPath = myLines[2];
+	std::string svgPath = myLines[0];
 
 	// std::cout << svgPath << std::endl;
 
@@ -202,13 +199,25 @@ void CFS::generate_target_eq(std::string fileName)
 	eqNB = targetEq.size();
 }
 
+void CFS::set_middle_point()
+{
+	centerPos = 0;
+	std::complex<float> sum = 0;
+	int n = 0;
+	for (float i = 0.f; i < 1.f; i+=INT_DT)
+	{
+		sum += apply_target_equation(i);
+		n++;
+	}
+	centerPos = sum/std::complex<float>(n, 0);
+}
 
 
 std::complex<float> CFS::apply_target_equation(float t)
 {
 	int equationID = (int)(t * (float)eqNB);
 	t = t * (float)eqNB - (float)equationID;
-	return targetEq[equationID].d + targetEq[equationID].c * t + targetEq[equationID].b * t * t + targetEq[equationID].a * t * t * t;
+	return targetEq[equationID].d + targetEq[equationID].c * t + targetEq[equationID].b * t * t + targetEq[equationID].a * t * t * t - centerPos;
 }
 
 std::complex<float> CFS::calculate_nth_term(int n)

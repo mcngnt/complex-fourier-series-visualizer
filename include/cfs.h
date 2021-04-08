@@ -34,6 +34,7 @@ public:
 	std::complex<float> apply_cfs_equation(float t);
 	std::complex<float> calculate_nth_term(int n);
 	std::complex<float> apply_cfs_equation_at_n(float t, int n);
+	void set_middle_point();
 	void calculate_coef();
 	void sort_coef();
 	Vector img_to_world_pos(Vector imgV);
@@ -42,7 +43,8 @@ public:
 
 	std::vector<equation> targetEq;
 	int eqNB = 0;
-	Vector svgSize = vec_v(0,0);
+	Vector svgSize = vec_v(SCREEN_W,SCREEN_H);
 	int circlesNB = 70;
 	std::vector<coeficient> coef;
+	std::complex<float> centerPos = 0;
 };
